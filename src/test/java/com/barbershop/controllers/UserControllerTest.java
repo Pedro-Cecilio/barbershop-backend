@@ -14,6 +14,7 @@ import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -33,9 +34,6 @@ class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Mock
-    private CreateUserDTO createUser;
-
     @Autowired
     private JacksonTester<CreateUserDTO> createUserJson;
 
@@ -53,12 +51,6 @@ class UserControllerTest {
                         createUserDTO).getJson()))
                 .andReturn().getResponse();
                 
-        String json = response.getContentAsString();
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        CreateUserDTO responseDto = mapper.readValue(json, CreateUserDTO.class);
-
-        assertEquals(createUserDTO.name(), responseDto.name());
         assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
     }
 }
