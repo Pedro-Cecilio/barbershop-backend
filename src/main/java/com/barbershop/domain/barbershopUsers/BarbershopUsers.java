@@ -1,8 +1,5 @@
 package com.barbershop.domain.barbershopUsers;
 
-import java.util.UUID;
-
-import com.barbershop.domain.address.Address;
 import com.barbershop.domain.barbershop.Barbershop;
 import com.barbershop.domain.user.User;
 
@@ -12,14 +9,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "barbershop_users")
+@Getter
+@Setter
 public class BarbershopUsers {
 
     @Id
